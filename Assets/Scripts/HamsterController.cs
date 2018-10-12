@@ -5,7 +5,8 @@ using UnityEngine;
 public class HamsterController : MonoBehaviour {
 
 	public Rigidbody rb;
-	public float speed = 4.0f;
+	public float speed = 4.0f, jumpSpeed = 3.0f, gravity = 50.0f;
+	public bool jumping;
 
 	// Use this for initialization
 	void Start () {
@@ -24,9 +25,12 @@ public class HamsterController : MonoBehaviour {
 		moveForce = vertical + horizontal; //Combined movement forces
 		Vector3 velocityChange = moveForce.normalized * speed - rb.velocity; //The difference in velocity between past and future.
 		rb.AddForce(velocityChange, ForceMode.VelocityChange); //Applies movement
-		rb.AddForce(transform.up * -70f); //Applies gravity
+		rb.AddForce(transform.up * -gravity); //Applies gravity
 
-		
+		if (Input.GetKeyDown(KeyCode.Space) && !jumping) {
+			rb.velocity += transform.up * jumpSpeed / gravity;
+			jumping = true;
+		}
 
 		transform.GetChild(0).LookAt(transform.position + moveForce); //Animates the face looking in the direction of movement
 	}
