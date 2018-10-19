@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodSupply : MonoBehaviour {
 
 	public double foodValue = 10;
-	private Rigidbody rb
+	private Rigidbody rb;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
