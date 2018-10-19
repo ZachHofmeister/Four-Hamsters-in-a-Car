@@ -701,7 +701,6 @@ GameObject:
   - component: {fileID: 133261710}
   - component: {fileID: 133261709}
   - component: {fileID: 133261708}
-  - component: {fileID: 133261711}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -769,19 +768,6 @@ Transform:
   m_Father: {fileID: 1274648133}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
---- !u!114 &133261711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 133261707}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab50f8162963d2d46a38d2c307287b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 415362983}
-  offset: {x: 0, y: 1.61, z: -5.87}
 --- !u!1 &160645621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,9 +1007,9 @@ MonoBehaviour:
   maxSteeringTorque: 30
   gasPercent: 0
   brakePercent: 0
-  cpGas: {fileID: 464589788}
-  cpBrake: {fileID: 718983877}
   cpSteering: {fileID: 105147471}
+  cpBrake: {fileID: 718983877}
+  cpGas: {fileID: 464589788}
 --- !u!54 &415362985
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1682,7 +1668,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh4310
+  m_Name: pb_Mesh13426
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2374,7 +2360,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13502
+  m_Name: pb_Mesh13380
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

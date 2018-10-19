@@ -40,8 +40,9 @@ public class CarController : MonoBehaviour {
 
 		float motor = maxMotorTorque * gasPercent; //Seperate gas pedal
 		float brake = maxBrakeTorque * brakePercent; //Seperate brake pedal
-		float steering = maxSteeringTorque * Input.GetAxis ("Horizontal");
-
+		Debug.Log (cpSteering.hamster);
+		float steering = maxSteeringTorque * (cpSteering.hamster != null ? Input.GetAxis ("Horizontal") : 0);
+		Debug.Log (steering);
 		foreach (AxleInfo axleInfo in axleInfos) {
 			if (axleInfo.steering) {
 				axleInfo.leftWheel.steerAngle = steering;
@@ -51,6 +52,8 @@ public class CarController : MonoBehaviour {
 			if (axleInfo.motor) {
 				axleInfo.leftWheel.motorTorque = motor;
 				axleInfo.rightWheel.motorTorque = motor;
+				axleInfo.leftWheel.brakeTorque = brake;
+				axleInfo.rightWheel.brakeTorque = brake;
 			}
 
 			ApplyLocalPositionToVisuals (axleInfo.leftWheel);

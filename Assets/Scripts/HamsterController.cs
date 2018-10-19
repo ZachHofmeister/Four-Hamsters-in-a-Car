@@ -44,6 +44,8 @@ public class HamsterController : MonoBehaviour {
 			transform.GetChild (0).LookAt (transform.position + moveForce); //Animates the face looking in the direction of movement
 
 			grounded = false;
+		} else {
+			rb.velocity = Vector3.zero;
 		}
 		if (cpCurrent != null && !beenControlling) {
 			beenControlling = true;
