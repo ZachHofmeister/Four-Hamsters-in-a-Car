@@ -8,10 +8,12 @@ public class HamsterController : MonoBehaviour {
 	public float speed = 4.0f, jumpSpeed = 3.0f, gravity = 1.0f;
 	public bool jumping, grounded, beenControlling;
 	public ControlPoint cpCurrent;
+	public CarController car;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>(); //Grabs the rigidbody component of the hamster
+		car = GameObject.FindGameObjectWithTag ("Car").GetComponent<CarController>();
 	}
 	
 	// Update is called once per frame
@@ -50,6 +52,7 @@ public class HamsterController : MonoBehaviour {
 		if (cpCurrent != null && !beenControlling) {
 			beenControlling = true;
 		}
+		rb.velocity += car.GetComponent<Rigidbody> ().velocity;
 	}
 
 	void OnCollisionStay(Collision col) {

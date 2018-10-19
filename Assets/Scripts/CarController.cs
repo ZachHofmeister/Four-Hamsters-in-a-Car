@@ -32,6 +32,7 @@ public class CarController : MonoBehaviour {
 	}
 
 	public void FixedUpdate () {
+		Debug.Log (GetComponent<Rigidbody>().velocity);
 		brakePercent += (cpBrake.hamster != null && Input.GetKey (KeyCode.S)) ? 0.1f : -0.1f;
 		brakePercent = Mathf.Clamp (brakePercent, 0f, 1f);
 		gasPercent += (cpGas.hamster != null && Input.GetKey (KeyCode.W)) ? 0.1f : -0.1f;
