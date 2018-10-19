@@ -11,16 +11,6 @@ public class CarController : MonoBehaviour {
 
     private void Update()
     {
-        float v = Input.GetAxis("Vertical") * motorForce;
-        float h = Input.GetAxis("Horizontal") * steerForce;
-
-        leftBackWheel.motorTorque = v;
-        rightBackWheel.motorTorque = v;
-
-        leftFrontWheel.steerAngle = h;
-        rightFrontWheel.steerAngle = h;
-
-
         Vector3 leftBackPosition, rightBackPosition, leftFrontPosition, rightFrontPosition;
         Quaternion leftBackRotation, rightBackRotation, leftFrontRotation, rightFrontRotation;
 
@@ -29,11 +19,27 @@ public class CarController : MonoBehaviour {
         rightBackWheel.GetWorldPose(out rightBackPosition, out rightBackRotation);
         rightFrontWheel.GetWorldPose(out rightFrontPosition, out rightFrontRotation);
 
+        leftBackWheel.transform.GetChild(0).position = leftBackPosition;
+        rightBackWheel.transform.GetChild(0).position = rightBackPosition;
+        leftFrontWheel.transform.GetChild(0).position = leftFrontPosition;
+        rightFrontWheel.transform.GetChild(0).position = rightFrontPosition;
 
         leftBackWheel.transform.GetChild(0).rotation = leftBackRotation;
         rightBackWheel.transform.GetChild(0).rotation = rightBackRotation;
         leftFrontWheel.transform.GetChild(0).rotation = leftFrontRotation;
         rightFrontWheel.transform.GetChild(0).rotation = rightFrontRotation;
+    }
+
+    private void FixedUpdate()
+    {
+        float v = Input.GetAxis("Vertical") * motorForce;
+        float h = Input.GetAxis("Horizontal") * steerForce;
+
+        leftBackWheel.motorTorque = v;
+        rightBackWheel.motorTorque = v;
+
+        leftFrontWheel.steerAngle = h;
+        rightFrontWheel.steerAngle = h;
 
         if (Input.GetKey(KeyCode.Space))
         {
