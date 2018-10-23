@@ -18,9 +18,14 @@ public class HamsterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (cpCurrent != null && Input.GetKeyDown (KeyCode.F) && beenControlling) {
+		if (cpCurrent != null && Input.GetKeyDown (KeyCode.E) && beenControlling) {
 			cpCurrent.hamster = null;
 			cpCurrent = null;
+		} else if (cpCurrent != null && !beenControlling) {
+			beenControlling = true;
+		}
+
+		if (cpCurrent == null && beenControlling) {
 			beenControlling = false;
 		}
 	}
@@ -47,9 +52,7 @@ public class HamsterController : MonoBehaviour {
 		} else {
 			rb.velocity = Vector3.zero;
 		}
-		if (cpCurrent != null && !beenControlling) {
-			beenControlling = true;
-		}
+
 		transform.GetChild (0).LookAt (transform.position + moveForce); //Animates the face looking in the direction of movement
 		rb.velocity += car.GetComponent<Rigidbody> ().velocity;
 	}
@@ -61,7 +64,7 @@ public class HamsterController : MonoBehaviour {
 
 	void OnTriggerStay (Collider col) {
 		Debug.Log (col.name);
-		if (col.tag == "ControlPoint" && col.GetComponent<ControlPoint> ().hamster == null && cpCurrent == null && (Input.GetKeyDown (KeyCode.E) || Input.GetKey(KeyCode.E))) {
+		if (col.tag == "ControlPoint" && col.GetComponent<ControlPoint> ().hamster == null && cpCurrent == null  && !beenControlling && Input.GetKeyDown (KeyCode.E)) {
 			Debug.Log ("STUFF");
 			ControlPoint cp = col.GetComponent<ControlPoint> ();
 			cp.hamster = this;
