@@ -3671,6 +3671,66 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2065432503}
+    - target: {fileID: 114609081026023784, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: maxMotorTorque
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114609081026023784, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: maxBrakeTorque
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114609081026023784, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: accelPercent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114609081026023784, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: decelPercent
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146765857431142226, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146474164852542242, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146208392422202202, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146981753220909544, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146765857431142226, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 146474164852542242, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 146208392422202202, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 146981753220909544, guid: 8c78d0ae7a6b836468ebbb941639164b,
+        type: 2}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c78d0ae7a6b836468ebbb941639164b, type: 2}
   m_IsPrefabAsset: 0
@@ -10284,7 +10344,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-159438
+  m_Name: pb_Mesh-8820
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -17947,7 +18007,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-273694
+  m_Name: pb_Mesh-8236
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -18471,7 +18531,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-273778
+  m_Name: pb_Mesh-8252
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -19568,7 +19628,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-273668
+  m_Name: pb_Mesh-8240
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -19723,7 +19783,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-273714
+  m_Name: pb_Mesh-8262
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

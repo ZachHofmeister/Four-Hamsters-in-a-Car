@@ -38,6 +38,7 @@ public class HamsterController : MonoBehaviour {
 		horizontal = transform.right * Input.GetAxisRaw ("Horizontal"); //Movement force for left/right
 		moveForce = vertical + horizontal; //Combined movement forces
 		moveForce = car.transform.TransformDirection (moveForce);
+		moveForce = new Vector3 (moveForce.x, 0f, moveForce.z);
 		Vector3 velocityChange = moveForce.normalized * speed - new Vector3 (rb.velocity.x, 0, rb.velocity.z); //The difference in velocity between past and future.
 		if (cpCurrent == null) {
 			rb.AddForce (velocityChange, ForceMode.VelocityChange); //Applies movement

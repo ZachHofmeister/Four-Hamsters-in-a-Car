@@ -12,7 +12,7 @@ public class AxleInfo {
 
 public class CarController : MonoBehaviour {
 	public List<AxleInfo> axleInfos;
-	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent;
+	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent, accelPercent, decelPercent;
 	public ControlPoint cpSteering, cpBrake, cpGas; 
 
 	public void ApplyLocalPositionToVisuals (WheelCollider collider) {
