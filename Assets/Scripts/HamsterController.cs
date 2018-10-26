@@ -9,11 +9,13 @@ public class HamsterController : MonoBehaviour {
 	public bool jumping, grounded, beenControlling;
 	public ControlPoint cpCurrent;
 	public CarController car;
+	public Camera cam;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>(); //Grabs the rigidbody component of the hamster
 		car = GameObject.FindGameObjectWithTag ("Car").GetComponent<CarController>();
+		cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
 	}
 	
 	// Update is called once per frame
@@ -35,6 +37,7 @@ public class HamsterController : MonoBehaviour {
 		vertical = transform.forward * Input.GetAxisRaw ("Vertical"); //Movement force for forward and back
 		horizontal = transform.right * Input.GetAxisRaw ("Horizontal"); //Movement force for left/right
 		moveForce = vertical + horizontal; //Combined movement forces
+		moveForce = car.transform.TransformDirection (moveForce);
 		Vector3 velocityChange = moveForce.normalized * speed - new Vector3 (rb.velocity.x, 0, rb.velocity.z); //The difference in velocity between past and future.
 		if (cpCurrent == null) {
 			rb.AddForce (velocityChange, ForceMode.VelocityChange); //Applies movement
