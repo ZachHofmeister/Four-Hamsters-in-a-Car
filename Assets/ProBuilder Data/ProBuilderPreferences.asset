@@ -15,16 +15,25 @@ MonoBehaviour:
   - pbIconGUI
   m_Int_keys:
   - pbHandleAlignment
+  - pb_GIWorkflowMode
   - pbDefaultEditLevel
+<<<<<<< HEAD
   - pbDefaultSelectionMode
+=======
+>>>>>>> parent of 8ae285b... Created prototype cop car and added AI to it
   m_Float_keys:
   - pbEditorScroll.x
   - pbEditorScroll.y
   m_String_keys: []
   m_Color_keys: []
   m_Material_keys: []
+<<<<<<< HEAD
   m_Bool_values: 01
-  m_Int_values: 000000000000000002000000
+  m_Int_values: 00000000000000000100000002000000
+=======
+  m_Bool_values: 
+  m_Int_values: 000000000000000000000000
+>>>>>>> parent of 8ae285b... Created prototype cop car and added AI to it
   m_Float_values:
   - 0
   - 0
