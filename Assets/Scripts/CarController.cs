@@ -32,7 +32,7 @@ public class CarController : MonoBehaviour {
 	}
 
 	public void FixedUpdate () {
-		Debug.Log (GetComponent<Rigidbody>().velocity);
+		//Debug.Log (GetComponent<Rigidbody>().velocity);
 		brakePercent += (cpBrake.hamster != null && Input.GetKey (KeyCode.S)) ? 0.1f : -0.1f;
 		brakePercent = Mathf.Clamp (brakePercent, 0f, 1f);
 		gasPercent += (cpGas.hamster != null && Input.GetKey (KeyCode.W)) ? 0.1f : -0.1f;
@@ -41,9 +41,9 @@ public class CarController : MonoBehaviour {
 
 		float motor = maxMotorTorque * gasPercent; //Seperate gas pedal
 		float brake = maxBrakeTorque * brakePercent; //Seperate brake pedal
-		Debug.Log (cpSteering.hamster);
+		//Debug.Log (cpSteering.hamster);
 		float steering = maxSteeringTorque * (cpSteering.hamster != null ? Input.GetAxis ("Horizontal") : 0);
-		Debug.Log (steering);
+		//Debug.Log (steering);
 		foreach (AxleInfo axleInfo in axleInfos) {
 			if (axleInfo.steering) {
 				axleInfo.leftWheel.steerAngle = steering;

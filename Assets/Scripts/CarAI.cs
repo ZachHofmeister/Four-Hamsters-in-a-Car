@@ -9,14 +9,13 @@ public class CarAI : MonoBehaviour {
 
     private NavMeshAgent navMesh;
 
-	// Use this for initialization
-	void Start () {
+    private void Start()
+    {
         navMesh = GetComponent<NavMeshAgent>();
-	}
+    }
 
-    private void FixedUpdate()
+    private void Update()
     {
         navMesh.SetDestination(target.position);
-
     }
 }
