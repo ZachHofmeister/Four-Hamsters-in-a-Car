@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 33924556529157062}
   - component: {fileID: 114369961132412436}
   - component: {fileID: 64807986440532636}
-  m_Layer: 0
+  - component: {fileID: 114502508828041112}
+  m_Layer: 10
   m_Name: Road T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2386,3 +2387,18 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114502508828041112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1681768504570018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
