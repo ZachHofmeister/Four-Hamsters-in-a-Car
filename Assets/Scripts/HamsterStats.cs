@@ -10,7 +10,6 @@ public class HamsterStats : MonoBehaviour
 	public double maxGas = 100, maxHunger = 100, maxThirst = 100, currentGas, currentHunger, currentThirst;
 	public double resourceDecrease;
 	public Text GasText, HungerText, ThirstText;
-	public bool waitScript = true;
 
 	void Start()
 	{ //Assign stats to max at beginning
@@ -42,19 +41,33 @@ public class HamsterStats : MonoBehaviour
 		}
 	}
 
-	void OnCollisionEnter(Collision other)
-	{
-		if(other.gameObject.CompareTag("FoodSupply"))
+	void OnTriggerStay(Collider other)
+	{//Detects resources and adds them to stats
+		if (other.name == "FoodSupply")
 		{
-			currentHunger += 10;
+			if (currentHunger > 0 && currentHunger <= 100)
+			{
+				currentHunger += 1;
+				HungerText.text = "Hunger: " + currentHunger.ToString();
+			}
+
 		}
-		if(other.gameObject.CompareTag("WaterSupply"))
+		if (other.name == "WaterSupply")
 		{
-			currentThirst += 10;
+			if (currentThirst > 0 && currentThirst <= 100)
+			{
+				currentThirst += 1;
+				ThirstText.text = "Thirst: " + currentThirst.ToString();
+			}
+
 		}
-		if(other.gameObject.CompareTag("GasSupply"))
+		if (other.name == "GasSupply")
 		{
-			currentGas += 10;
+			if (currentHunger > 0 && currentHunger <= 100)
+			{
+				currentGas += 1;
+				GasText.text = "Gas: " + currentGas.ToString();
+			}
 		}
 	}
 }
