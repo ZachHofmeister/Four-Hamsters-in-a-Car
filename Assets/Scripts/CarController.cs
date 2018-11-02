@@ -13,7 +13,8 @@ public class AxleInfo {
 public class CarController : MonoBehaviour {
 	public List<AxleInfo> axleInfos;
 	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent, accelPercent, decelPercent;
-	public ControlPoint cpSteering, cpBrake, cpGas; 
+	public ControlPoint cpSteering, cpBrake, cpGas, cpReverse;
+	public bool rev;
 
 	public void ApplyLocalPositionToVisuals (WheelCollider collider) {
 		if (collider.transform.childCount == 0)
@@ -31,15 +32,21 @@ public class CarController : MonoBehaviour {
 		visualWheel.transform.rotation = rotation;
 	}
 
+	public void Update () {
+		if (cpReverse.hamster != null) {
+			rev = !cpReverse.leverState;
+		}
+	}
+
 	public void FixedUpdate () {
 		//Debug.Log (GetComponent<Rigidbody>().velocity);
 		brakePercent += (cpBrake.hamster != null && Input.GetKey (KeyCode.S)) ? 0.1f : -0.1f;
 		brakePercent = Mathf.Clamp (brakePercent, 0f, 1f);
-		gasPercent += (cpGas.hamster != null && Input.GetKey (KeyCode.W)) ? 0.1f : -0.1f;
+		gasPercent += (cpGas.hamster != null && (Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.S))) ? 0.1f : -0.1f;
 		gasPercent -= brakePercent; //Allows brakes to override gas, otherwise car would continue forwards if brake is held after and while gas is held.
 		gasPercent = Mathf.Clamp (gasPercent, 0f, 1f);
 
-		float motor = maxMotorTorque * gasPercent; //Seperate gas pedal
+		float motor = maxMotorTorque * (rev? -gasPercent : gasPercent); //Seperate gas pedal
 		float brake = maxBrakeTorque * brakePercent; //Seperate brake pedal
 		//Debug.Log (cpSteering.hamster);
 		float steering = maxSteeringTorque * (cpSteering.hamster != null ? Input.GetAxis ("Horizontal") : 0);
