@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DeathScreenMenu : HamsterStats {
+public class DeathScreenMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,8 +13,12 @@ public class DeathScreenMenu : HamsterStats {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.O)) 
 		{
-			SceneManager.LoadScene ("LevelProto");	
-		} 
+			SceneManager.LoadScene ("UITest");	
+		}
+		else if (Input.GetKeyDown (KeyCode.I))
+		{
+			SceneManager.LoadScene ("IntroScene");
+		}
 		else if (Input.GetKeyDown (KeyCode.P)) 
 		{
 			Application.Quit ();
