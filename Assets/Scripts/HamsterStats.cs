@@ -14,11 +14,11 @@ public class HamsterStats : MonoBehaviour
 
 	void Start()
 	{ //Assign stats to max at beginning
-		Stars = 0;
 		currentGas = maxGas;
 		currentHunger = maxHunger;
 		currentThirst = maxThirst;
 		resourceDecrease = 1;
+		Stars = 0;
 	}
 
 
@@ -31,7 +31,7 @@ public class HamsterStats : MonoBehaviour
 		nowThirst = (int)currentThirst;
 		nowHunger = (int)currentHunger;
 		AlterStatsText();
-		//StarsDetection (Stars);
+		StarsDetection ();
 	}
 
 	void AlterStatsText()
@@ -46,39 +46,39 @@ public class HamsterStats : MonoBehaviour
 		}
 	}
 
-	//void StarsDetection ();
-	//{
-	//	if(resourceDecrease >= 10 && resourceDecrease <= 20)
-	//	{
-	//		Stars = 1;
-	//		StarsText.Text = "STARS: " + Stars.ToString();
-	//		return Stars;
-	//	}
-	//	else if(resourceDecrease >= 21 && resourceDecrease <= 40)
-	//	{
-	//		Stars = 2;
-	//		StarsText.Text = "STARS: " + Stars.ToString();
-	//		return Stars;
-	//	}
-	//	else if(resourceDecrease >= 41 && resourceDecrease <= 60)
-	//	{
-	//		Stars = 3;
-	//		/StarsText.Text = "STARS: " + Stars.ToString();
-		//	return Stars;
-		//}
-		//else if(resourceDecrease >= 61 && resourceDecrease <= 80)
-		//{
-			//Stars = 4;
-			//StarsText.Text = "STARS: " + Stars.ToString();
-			//return Stars;
-		//}
-		//else if(resourceDecrease >= 80 && resourceDecrease <= 100)
-		//{
-			//Stars = 5;
-			///StarsText.Text = "STARS: " + Stars.ToString();
-			//return Stars;
-		//}
-	//}
+	void StarsDetection ()
+	{ //Determines how many stars the players have
+		if(resourceDecrease <= 9)
+		{
+			Stars = 0;
+			StarsText.text = "STARS: " + Stars.ToString();
+		}
+		else if(resourceDecrease >= 10 && resourceDecrease <= 50)
+		{
+			Stars = 1;
+			StarsText.text = "STARS: " + Stars.ToString();
+		}
+		else if(resourceDecrease >= 51 && resourceDecrease <= 100)
+		{
+			Stars = 2;
+			StarsText.text = "STARS: " + Stars.ToString();
+		}
+		else if(resourceDecrease >= 101 && resourceDecrease <= 150)
+		{
+			Stars = 3;
+			StarsText.text = "STARS: " + Stars.ToString();
+		}
+		else if(resourceDecrease >= 151 && resourceDecrease <= 200)
+		{
+			Stars = 4;
+			StarsText.text = "STARS: " + Stars.ToString();
+		}
+		else if(resourceDecrease >= 201 && resourceDecrease <= 300)
+		{
+			Stars = 5;
+			StarsText.text = "STARS: " + Stars.ToString();
+		}
+	}
 
 	void OnTriggerStay(Collider other)
 	{//Detects resources and adds them to stats
@@ -109,5 +109,4 @@ public class HamsterStats : MonoBehaviour
 			}
 		}
 	}
-
 }
