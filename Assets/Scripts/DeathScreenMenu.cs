@@ -13,8 +13,12 @@ public class DeathScreenMenu : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.O)) 
 		{
-			SceneManager.LoadScene ("HamsterTest");	
-		} 
+			SceneManager.LoadScene ("UITest");	
+		}
+		else if (Input.GetKeyDown (KeyCode.I))
+		{
+			SceneManager.LoadScene ("IntroScene");
+		}
 		else if (Input.GetKeyDown (KeyCode.P)) 
 		{
 			Application.Quit ();

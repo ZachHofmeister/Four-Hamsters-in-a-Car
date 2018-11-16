@@ -9,18 +9,25 @@ public class HamsterController : MonoBehaviour {
 	public bool jumping, grounded, beenControlling;
 	public ControlPoint cpCurrent;
 	public CarController car;
+	public Camera cam;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>(); //Grabs the rigidbody component of the hamster
 		car = GameObject.FindGameObjectWithTag ("Car").GetComponent<CarController>();
+		cam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (cpCurrent != null && Input.GetKeyDown (KeyCode.F) && beenControlling) {
+		if (cpCurrent != null && Input.GetKeyDown (KeyCode.E) && beenControlling) {
 			cpCurrent.hamster = null;
 			cpCurrent = null;
+		} else if (cpCurrent != null && !beenControlling) {
+			beenControlling = true;
+		}
+
+		if (cpCurrent == null && beenControlling) {
 			beenControlling = false;
 		}
 	}
@@ -30,6 +37,8 @@ public class HamsterController : MonoBehaviour {
 		vertical = transform.forward * Input.GetAxisRaw ("Vertical"); //Movement force for forward and back
 		horizontal = transform.right * Input.GetAxisRaw ("Horizontal"); //Movement force for left/right
 		moveForce = vertical + horizontal; //Combined movement forces
+		moveForce = car.transform.TransformDirection (moveForce);
+		moveForce = new Vector3 (moveForce.x, 0f, moveForce.z);
 		Vector3 velocityChange = moveForce.normalized * speed - new Vector3 (rb.velocity.x, 0, rb.velocity.z); //The difference in velocity between past and future.
 		if (cpCurrent == null) {
 			rb.AddForce (velocityChange, ForceMode.VelocityChange); //Applies movement
@@ -47,9 +56,7 @@ public class HamsterController : MonoBehaviour {
 		} else {
 			rb.velocity = Vector3.zero;
 		}
-		if (cpCurrent != null && !beenControlling) {
-			beenControlling = true;
-		}
+
 		transform.GetChild (0).LookAt (transform.position + moveForce); //Animates the face looking in the direction of movement
 		rb.velocity += car.GetComponent<Rigidbody> ().velocity;
 	}
@@ -61,7 +68,7 @@ public class HamsterController : MonoBehaviour {
 
 	void OnTriggerStay (Collider col) {
 		Debug.Log (col.name);
-		if (col.tag == "ControlPoint" && col.GetComponent<ControlPoint> ().hamster == null && cpCurrent == null && (Input.GetKeyDown (KeyCode.E) || Input.GetKey(KeyCode.E))) {
+		if (col.tag == "ControlPoint" && col.GetComponent<ControlPoint> ().hamster == null && cpCurrent == null  && !beenControlling && Input.GetKeyDown (KeyCode.E)) {
 			Debug.Log ("STUFF");
 			ControlPoint cp = col.GetComponent<ControlPoint> ();
 			cp.hamster = this;

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ControlPoint
   - Car
+  - WaterSupply
+  - FoodSupply
+  - GasSupply
   layers:
   - Default
   - TransparentFX
@@ -16,9 +19,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - Building
+  - Road
+  - Car
   - 
   - 
   - 
