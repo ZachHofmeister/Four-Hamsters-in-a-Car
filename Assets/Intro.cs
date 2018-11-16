@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-
+/*
 public class Intro : MonoBehaviour {
 
     public canvas[] images; 
@@ -26,3 +26,4 @@ public class Intro : MonoBehaviour {
         }
 	}
 }
+*/ 
