@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/HamsterTest.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Death Screen.unity
-    guid: 368b0f62f4018429db215a1486302238
+    path: Assets/Scenes/MainMenu.unity
+    guid: 11c629f57ccd1614f9b9d7204e801209
   - enabled: 1
     path: Assets/Scenes/UITest.unity
     guid: 55145ef3456304ab6bdb1539be7741ff
   - enabled: 1
-    path: Assets/Scenes/IntroScene.unity
-    guid: 11c629f57ccd1614f9b9d7204e801209
+    path: Assets/Scenes/Death Screen.unity
+    guid: 368b0f62f4018429db215a1486302238
   m_configObjects: {}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleBehaviors : MonoBehaviour {
 
-	public bool 
+	public bool touching;
 
 	void Start () {
 		

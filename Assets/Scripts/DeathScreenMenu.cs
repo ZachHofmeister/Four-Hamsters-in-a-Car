@@ -17,7 +17,7 @@ public class DeathScreenMenu : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown (KeyCode.I))
 		{
-			SceneManager.LoadScene ("IntroScene");
+			SceneManager.LoadScene ("MainMenu");
 		}
 		else if (Input.GetKeyDown (KeyCode.P)) 
 		{

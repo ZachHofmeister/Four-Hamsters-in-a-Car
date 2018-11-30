@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PauseFunction : MonoBehaviour {
 
 	[SerializeField] private GameObject pausePanel;
+	public Button MenuButton;
 	public Text pause;
 	void Start () {
 		pause.text = " ";
