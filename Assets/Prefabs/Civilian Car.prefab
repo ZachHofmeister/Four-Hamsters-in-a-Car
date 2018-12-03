@@ -608,16 +608,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedbb4461f78a1a46b9cec2594e389ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   wheelFL: {fileID: 146080469772891632}
   wheelFR: {fileID: 146166158008514426}
   wheelBL: {fileID: 146433859267569544}
   wheelBR: {fileID: 146120500236854862}
   maxMotorTorque: 1000
   maxBrakeTorque: 1000
-  maxSpeed: 10
+  maxSpeed: 5
   maxSteerAngle: 30
-  turnSpeed: 11
+  turnSpeed: 6
 --- !u!114 &114609477891746548
 MonoBehaviour:
   m_ObjectHideFlags: 1
