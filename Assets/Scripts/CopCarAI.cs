@@ -2,31 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEditor;
 
 public class Road
 {
-    public Transform transform;
+    [SerializeField]
+    private Transform _transform;
 
     [SerializeField]
     private Road _previous;
+
+    [SerializeField]
     private Vector3 _origin;
+
+    [SerializeField]
+    private string _name;
+    
 
     [SerializeField]
     private int _gCost, _hCost, _fCost;
     
     public Road(Transform transform)
     {
-        this.transform = transform;
+        this._transform = transform;
+        this.name = transform.gameObject.name;
 
         if (transform.eulerAngles.y == 180)
-            this.origin = this.transform.position + new Vector3(-5f, 0f, 5f);
+            this.origin = transform.position + new Vector3(-5f, 0f, 5f);
         else if (transform.eulerAngles.y == 0f)
-            this.origin = this.transform.position + new Vector3(5f, 0f, -5f);
+            this.origin = transform.position + new Vector3(5f, 0f, -5f);
         else if (transform.eulerAngles.y == 270f)
-            this.origin = this.transform.position + new Vector3(5f, 0f, 5f);
+            this.origin = transform.position + new Vector3(5f, 0f, 5f);
         else if (transform.eulerAngles.y == 90f)
-            this.origin = this.transform.position + new Vector3(-5f, 0f, -5f);
+            this.origin = transform.position + new Vector3(-5f, 0f, -5f);
     }
 
     public Road previous
@@ -35,10 +42,30 @@ public class Road
         set { _previous = value; }
     }
 
+    public Transform transform
+    {
+        get { return _transform; }
+        set { _transform = value; }
+    }
+
+    public bool drivable
+    {
+        get
+        {
+            return !Physics.CheckSphere(origin, 10f, 1 << LayerMask.NameToLayer("NPC Car"));
+        }
+    }
+
     public Vector3 origin
     {
         get { return _origin; }
         set { _origin = value; }
+    }
+
+    public string name
+    {
+        get { return _name; }
+        set { _name = value; }
     }
 
     public int gCost
@@ -58,8 +85,6 @@ public class Road
         get { return _fCost; }
         set { _fCost = value; }
     }
-
-
 }
 
 public class CopCarAI : MonoBehaviour {
@@ -76,14 +101,10 @@ public class CopCarAI : MonoBehaviour {
     private float currentSpeed;
 
     private List<Road> roads;
-    private Road currentRoad, previousRoad;
-
-    private List<Road> path;
-    private bool foundPath = false;
 
     private CarController player;
-    private Road playerRoad;
 
+    private List<Road> currentPath;
 
     // Use this for initialization
     void Start () {
@@ -94,9 +115,9 @@ public class CopCarAI : MonoBehaviour {
         {
             roads.Add(new Road(road.transform));
         }
-        path = new List<Road>();
 
         player = FindObjectOfType<CarController>();
+        currentPath = new List<Road>();
     }
 
     public void ApplyLocalPositionToVisuals(WheelCollider collider)
@@ -116,39 +137,9 @@ public class CopCarAI : MonoBehaviour {
         visualWheel.transform.rotation = rotation;
     }
 
-    private Road FindRoadPlayerIsOn()
-    {
-        WheelHit wheelFLHit, wheelFRHit;
-        player.axleInfos[0].leftWheel.GetGroundHit(out wheelFLHit);
-        player.axleInfos[0].rightWheel.GetGroundHit(out wheelFRHit);
-
-        if (wheelFLHit.collider == null && wheelFRHit.collider == null)
-            return null;
-
-        return roads.Find(road => road.transform == wheelFLHit.collider.transform && road.transform == wheelFRHit.collider.transform);
-
-    }
-
     private int ManhattanDistance(Road start, Road end)
     {
         return Mathf.RoundToInt(Mathf.Abs(end.origin.x - start.origin.x) + Mathf.Abs(end.origin.z - start.origin.z));
-    }
-
-    private Road GetRoadStraightAhead(Road root)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(root.origin, transform.forward, out hit, 10f, 1 << LayerMask.NameToLayer("Road")))
-        {
-            if (hit.collider != null)
-            {
-                if (hit.collider.transform != root.transform)
-                {
-                    return roads.Find(road => road.transform == hit.collider.transform);
-                }
-            }
-        }
-
-        return null;
     }
 
     private List<Road> GetNearByRoads(Road root)
@@ -209,37 +200,47 @@ public class CopCarAI : MonoBehaviour {
         return neighbors;
     }
 
+    private Road GetRoadStraightAhead(Road root)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(root.origin, transform.forward, out hit, 10f, 1 << LayerMask.NameToLayer("Road")))
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.transform != root.transform)
+                {
+                    return roads.Find(road => road.transform == hit.collider.transform);
+                }
+            }
+        }
+
+        return null;
+    }
+
     private void FindPathBetween(Road start, Road end)
     {
-        if (start == null || end == null)
-            return;
-
         List<Road> open = new List<Road>();
-        List<Road> closed = new List<Road>();
-
         open.Add(start);
+
+        HashSet<Road> closed = new HashSet<Road>();
+        int counter = 0;
+
         while (open.Count > 0)
         {
             Road current = open[0];
+
             for (int i = 0; i < open.Count; i++)
             {
-                if (open[i].fCost < current.fCost)
-                    current = open[i];
-                else if(open[i].fCost == current.fCost)
+                if (open[i].fCost < current.fCost || open[i].fCost == current.fCost && open[i].hCost < current.hCost)
                 {
-                    if (open[i].gCost > current.gCost)
-                        current = open[i];
-                    else if(open[i].gCost == current.gCost)
-                    {
-                        if (open[i].hCost < current.hCost)
-                            current = open[i];
-                    }
+                    current = open[i];
                 }
             }
 
             if (current.transform == end.transform)
             {
-                ConstructPath(end);
+                ConstructPath(start, end);
                 return;
             }
 
@@ -248,7 +249,7 @@ public class CopCarAI : MonoBehaviour {
 
             foreach (Road neighbor in GetNearByRoads(current))
             {
-                if (closed.Contains(neighbor))
+                if (!neighbor.drivable || closed.Contains(neighbor))
                     continue;
 
                 int possibleGCost = current.gCost + ManhattanDistance(neighbor, current);
@@ -265,7 +266,9 @@ public class CopCarAI : MonoBehaviour {
                 neighbor.fCost = neighbor.gCost + neighbor.hCost;
 
                 neighbor.previous = current;
-            }   
+            }
+
+            counter++;
         }
     }
 
@@ -276,27 +279,37 @@ public class CopCarAI : MonoBehaviour {
         return (n - a > b - n) ? b : a; //Return closest of two
     }
 
-    private void ConstructPath(Road end)
+    private void ConstructPath(Road start, Road end)
     {
+        List<Road> path = new List<Road>();
         Road current = end;
 
-        while (current.previous != null)
+        while (current.transform != start.transform)
         {
             path.Add(current);
             current = current.previous;
         }
-
-        path.Add(current);
         path.Reverse();
-        foundPath = true;
+
+        currentPath = path;
     }
 
     private void ShowPath()
     {
-        GameObject[] pathObjects = new GameObject[path.Count];
-        for (int i = 0; i < path.Count; i++)
-            pathObjects[i] = path[i].transform.gameObject;
-        Selection.objects = pathObjects;
+        if (currentPath.Count <= 0)
+            return;
+
+        for (int i = currentPath.Count - 1; i > 0; i--)
+        {
+            Vector3 start = currentPath[i].origin + Vector3.up;
+            Vector3 end = currentPath[i - 1].origin + Vector3.up;
+
+            Debug.DrawLine(start, end);
+        }
+
+        Vector3 next = currentPath[0].origin + Vector3.up;
+        Vector3 current = FindRoadWith(transform).origin + Vector3.up;
+        Debug.DrawLine(next, current);
     }
 
     private void TurnWheels(float steerAngle)
@@ -305,48 +318,42 @@ public class CopCarAI : MonoBehaviour {
         wheelFR.steerAngle = Mathf.Lerp(wheelFR.steerAngle, steerAngle, Time.deltaTime * turnSpeed);
     }
 
-    // Update is called once per frame
-    void FixedUpdate () {
-        WheelHit wheelFLHit, wheelFRHit, wheelBLHit, wheelBRHit;
-        wheelFL.GetGroundHit(out wheelFLHit);
-        wheelFR.GetGroundHit(out wheelFRHit);
-        wheelBL.GetGroundHit(out wheelBLHit);
-        wheelBR.GetGroundHit(out wheelBRHit);
+    private Road FindRoadWith(Transform car)
+    {
+        RaycastHit ground;
 
+        if (Physics.Raycast(car.position, -car.up, out ground, Mathf.Infinity, 1 << LayerMask.NameToLayer("Road")))
+        {
+            return roads.Find(road => ground.collider.transform == road.transform);
+        }
+
+        return null;
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        Road currentRoad = FindRoadWith(transform);
+        Road playerRoad = FindRoadWith(player.transform);
+
+        FindPathBetween(currentRoad, playerRoad);
+        //ShowPath();
+    }
+
+    void FixedUpdate () {
+        
         currentSpeed = body.velocity.magnitude * 2.237f;
         wheelFL.motorTorque = currentSpeed < maxSpeed ? maxMotorTorque : 0f;
         wheelFR.motorTorque = currentSpeed < maxSpeed ? maxMotorTorque : 0f;
-
-        if (!(wheelFLHit.collider == null || wheelFRHit.collider == null || wheelBLHit.collider == null || wheelBRHit.collider == null))
+        
+        if (currentPath.Count > 0)
         {
-            playerRoad = FindRoadPlayerIsOn();
-            if (playerRoad == null)
-                return;
-
-            currentRoad = roads.Find(road => road.transform == wheelFLHit.collider.transform && road.transform == wheelFRHit.collider.transform);
-            if (currentRoad == null)
-                return;
-
-            if (!foundPath)
-            {
-                Road forwardRoad = GetRoadStraightAhead(currentRoad);
-                if (forwardRoad == null)
-                    return;
-                FindPathBetween(forwardRoad, playerRoad);
-            }
-            else
-            {
-
-                if (path.IndexOf(currentRoad) > 0 && path.IndexOf(currentRoad) < path.Count - 1)
-                {
-                    Road nextRoad = path[path.IndexOf(currentRoad) + 1];
-                    Vector3 nextVector = transform.InverseTransformPoint(nextRoad.origin);
-                    float nextSteer = (nextVector.x / nextVector.magnitude) * maxSteerAngle;
-
-                    TurnWheels(nextSteer);
-                }
-            }
+            Road nextRoad = currentPath[0];
+            Vector3 nextVector = transform.InverseTransformPoint(nextRoad.origin);
+            float nextSteer = (nextVector.x / nextVector.magnitude) * maxSteerAngle;
+            TurnWheels(nextSteer);
         }
+        
 
         ApplyLocalPositionToVisuals(wheelFL);
         ApplyLocalPositionToVisuals(wheelFR);

@@ -46,7 +46,7 @@ public class CarController : MonoBehaviour {
 		gasPercent -= brakePercent; //Allows brakes to override gas, otherwise car would continue forwards if brake is held after and while gas is held.
 		gasPercent = Mathf.Clamp (gasPercent, 0f, 1f);
 
-		float motor = maxMotorTorque * (rev? -gasPercent : gasPercent); //Seperate gas pedal
+        float motor = maxMotorTorque * (rev? -gasPercent : gasPercent); //Seperate gas pedal
 		float brake = maxBrakeTorque * brakePercent; //Seperate brake pedal
 		//Debug.Log (cpSteering.hamster);
 		float steering = maxSteeringTorque * (cpSteering.hamster != null ? Input.GetAxis ("Horizontal") : 0);
