@@ -107,7 +107,7 @@ public class CopCarAI : MonoBehaviour {
     private List<Road> currentPath;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         body = GetComponent<Rigidbody>();
 
         roads = new List<Road>();
@@ -197,6 +197,9 @@ public class CopCarAI : MonoBehaviour {
 
     private void FindPathBetween(Road start, Road end)
     {
+        if (start == null || end == null)
+            return;
+
         List<Road> open = new List<Road>();
         open.Add(start);
 

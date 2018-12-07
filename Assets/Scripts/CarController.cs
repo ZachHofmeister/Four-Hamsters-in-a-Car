@@ -13,14 +13,10 @@ public class AxleInfo {
 
 public class CarController : MonoBehaviour {
 	public List<AxleInfo> axleInfos;
-//>>>>>>> refs/remotes/origin/master
 	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent, accelPercent, decelPercent;
 	public ControlPoint cpSteering, cpBrake, cpGas, cpReverse;
 	public bool rev;
 	AudioSource Car_Running;
-//=======
-//    public float maxMotorTorque, maxSteeringTorque;
-//>>>>>>> New Models Added to Cars
 
 	public void ApplyLocalPositionToVisuals (WheelCollider collider) {
 		if (collider.transform.childCount == 0)
