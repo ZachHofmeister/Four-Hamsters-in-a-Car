@@ -1703,7 +1703,7 @@ MonoBehaviour:
   wheelBR: {fileID: 146774265191483230}
   maxMotorTorque: 1000
   maxBrakeTorque: 1000
-  maxSpeed: 0
+  maxSpeed: 10
   maxSteerAngle: 30
   turnSpeed: 5
 --- !u!146 &146037998001659230
