@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 33863751243944754}
   - component: {fileID: 114178481070954002}
   - component: {fileID: 64485355029631792}
-  - component: {fileID: 114677363067059342}
   m_Layer: 9
   m_Name: Building Tall
   m_TagString: Untagged
@@ -827,18 +826,3 @@ MonoBehaviour:
   - x: 19
     y: 18
   m_selectedTriangles: 10000000110000001200000013000000
---- !u!114 &114677363067059342
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1319011246890266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff

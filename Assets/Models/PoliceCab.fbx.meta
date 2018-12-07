@@ -1,0 +1,232 @@
+fileFormatVersion: 2
+guid: 050e98066b7234f47aaf24fb4fdc9438
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: detail_fenderSquare_47
+    100002: detail_fenderSquare_49
+    100004: detail_fenderSquare_53
+    100006: detail_fenderSquare_55
+    100008: detail_fenderSquare_68
+    100010: detail_fenderSquare_70
+    100012: detail_fenderSquare_72
+    100014: detail_fenderSquare_74
+    100016: detail_policeLights_51
+    100018: hood_default_40
+    100020: hood_short_46
+    100022: //RootNode
+    100024: wheel_truck_42
+    100026: wheel_truck_48
+    100028: wheel_truck_52
+    100030: wheel_truck_54
+    100032: wheel_truck_67
+    100034: wheel_truck_69
+    100036: wheel_truck_71
+    100038: wheel_truck_73
+    100040: windshield_default_38
+    100042: windshield_default_50
+    400000: detail_fenderSquare_47
+    400002: detail_fenderSquare_49
+    400004: detail_fenderSquare_53
+    400006: detail_fenderSquare_55
+    400008: detail_fenderSquare_68
+    400010: detail_fenderSquare_70
+    400012: detail_fenderSquare_72
+    400014: detail_fenderSquare_74
+    400016: detail_policeLights_51
+    400018: hood_default_40
+    400020: hood_short_46
+    400022: //RootNode
+    400024: wheel_truck_42
+    400026: wheel_truck_48
+    400028: wheel_truck_52
+    400030: wheel_truck_54
+    400032: wheel_truck_67
+    400034: wheel_truck_69
+    400036: wheel_truck_71
+    400038: wheel_truck_73
+    400040: windshield_default_38
+    400042: windshield_default_50
+    2100000: _defaultMat
+    2100002: blueSteel
+    2100004: lightRed
+    2100006: light
+    2100008: tire
+    2100010: lightBlue
+    2300000: detail_fenderSquare_47
+    2300002: detail_fenderSquare_49
+    2300004: detail_fenderSquare_53
+    2300006: detail_fenderSquare_55
+    2300008: detail_fenderSquare_68
+    2300010: detail_fenderSquare_70
+    2300012: detail_fenderSquare_72
+    2300014: detail_fenderSquare_74
+    2300016: detail_policeLights_51
+    2300018: hood_default_40
+    2300020: hood_short_46
+    2300022: wheel_truck_42
+    2300024: wheel_truck_48
+    2300026: wheel_truck_52
+    2300028: wheel_truck_54
+    2300030: wheel_truck_67
+    2300032: wheel_truck_69
+    2300034: wheel_truck_71
+    2300036: wheel_truck_73
+    2300038: windshield_default_38
+    2300040: windshield_default_50
+    3300000: detail_fenderSquare_47
+    3300002: detail_fenderSquare_49
+    3300004: detail_fenderSquare_53
+    3300006: detail_fenderSquare_55
+    3300008: detail_fenderSquare_68
+    3300010: detail_fenderSquare_70
+    3300012: detail_fenderSquare_72
+    3300014: detail_fenderSquare_74
+    3300016: detail_policeLights_51
+    3300018: hood_default_40
+    3300020: hood_short_46
+    3300022: wheel_truck_42
+    3300024: wheel_truck_48
+    3300026: wheel_truck_52
+    3300028: wheel_truck_54
+    3300030: wheel_truck_67
+    3300032: wheel_truck_69
+    3300034: wheel_truck_71
+    3300036: wheel_truck_73
+    3300038: windshield_default_38
+    3300040: windshield_default_50
+    4300000: windshield_default_38
+    4300002: hood_default_40
+    4300004: wheel_truck_42
+    4300006: hood_short_46
+    4300008: detail_fenderSquare_47
+    4300010: wheel_truck_48
+    4300012: detail_fenderSquare_49
+    4300014: windshield_default_50
+    4300016: detail_policeLights_51
+    4300018: wheel_truck_52
+    4300020: detail_fenderSquare_53
+    4300022: wheel_truck_54
+    4300024: detail_fenderSquare_55
+    4300026: wheel_truck_67
+    4300028: detail_fenderSquare_68
+    4300030: wheel_truck_69
+    4300032: detail_fenderSquare_70
+    4300034: wheel_truck_71
+    4300036: detail_fenderSquare_72
+    4300038: wheel_truck_73
+    4300040: detail_fenderSquare_74
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _defaultMat
+    second: {fileID: 2100000, guid: da259b661759b0541929220ff0cad6aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blueSteel
+    second: {fileID: 2100000, guid: 0907c4d66dd0822488325d9ca301ad53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light
+    second: {fileID: 2100000, guid: 093d36b990b118f498784b814ce44ba3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightBlue
+    second: {fileID: 2100000, guid: 9420b4b5b95b5264a84028f1028ac133, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightRed
+    second: {fileID: 2100000, guid: 34d03313c0425b74a960d5f640dd03e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tire
+    second: {fileID: 2100000, guid: eda6014f5be346747b4836b309d4dcc2, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.12
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 0
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

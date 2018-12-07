@@ -120,7 +120,7 @@ public class CopCarAI : MonoBehaviour {
         currentPath = new List<Road>();
     }
 
-    public void ApplyLocalPositionToVisuals(WheelCollider collider)
+    public void ApplyLocalPositionToVisuals(WheelCollider collider, Vector3 offset)
     {
         if (collider.transform.childCount == 0)
             return;
@@ -130,11 +130,6 @@ public class CopCarAI : MonoBehaviour {
         Vector3 position;
         Quaternion rotation;
         collider.GetWorldPose(out position, out rotation);
-
-        visualWheel.transform.position = position;
-
-        rotation *= Quaternion.Euler(90f, 0f, 90f);
-        visualWheel.transform.rotation = rotation;
     }
 
     private int ManhattanDistance(Road start, Road end)
@@ -198,24 +193,6 @@ public class CopCarAI : MonoBehaviour {
 
 
         return neighbors;
-    }
-
-    private Road GetRoadStraightAhead(Road root)
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(root.origin, transform.forward, out hit, 10f, 1 << LayerMask.NameToLayer("Road")))
-        {
-            if (hit.collider != null)
-            {
-                if (hit.collider.transform != root.transform)
-                {
-                    return roads.Find(road => road.transform == hit.collider.transform);
-                }
-            }
-        }
-
-        return null;
     }
 
     private void FindPathBetween(Road start, Road end)
@@ -335,9 +312,9 @@ public class CopCarAI : MonoBehaviour {
     {
         Road currentRoad = FindRoadWith(transform);
         Road playerRoad = FindRoadWith(player.transform);
-
+        
         FindPathBetween(currentRoad, playerRoad);
-        //ShowPath();
+        ShowPath();
     }
 
     void FixedUpdate () {
@@ -355,9 +332,9 @@ public class CopCarAI : MonoBehaviour {
         }
         
 
-        ApplyLocalPositionToVisuals(wheelFL);
-        ApplyLocalPositionToVisuals(wheelFR);
-        ApplyLocalPositionToVisuals(wheelBL);
-        ApplyLocalPositionToVisuals(wheelBR);
+        ApplyLocalPositionToVisuals(wheelFL, Vector3.forward * -0.5f);
+        ApplyLocalPositionToVisuals(wheelFR, Vector3.forward * 0.5f);
+        ApplyLocalPositionToVisuals(wheelBL, Vector3.forward * -0.5f);
+        ApplyLocalPositionToVisuals(wheelBR, Vector3.forward * 0.5f);
     }
 }

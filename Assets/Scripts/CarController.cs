@@ -13,10 +13,14 @@ public class AxleInfo {
 
 public class CarController : MonoBehaviour {
 	public List<AxleInfo> axleInfos;
+<<<<<<< refs/remotes/origin/master
 	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent, accelPercent, decelPercent;
 	public ControlPoint cpSteering, cpBrake, cpGas, cpReverse;
 	public bool rev;
 	AudioSource Car_Running;
+=======
+    public float maxMotorTorque, maxSteeringTorque;
+>>>>>>> New Models Added to Cars
 
 	public void ApplyLocalPositionToVisuals (WheelCollider collider) {
 		if (collider.transform.childCount == 0)
@@ -29,30 +33,14 @@ public class CarController : MonoBehaviour {
 		collider.GetWorldPose (out position, out rotation);
 
 		visualWheel.transform.position = position;
-
-		rotation *= Quaternion.Euler (90f, 0f, 90f);
 		visualWheel.transform.rotation = rotation;
 	}
 
-	public void Update () {
-		if (cpReverse.hamster != null) {
-			rev = !cpReverse.leverState;
-		}
-	}
-
 	public void FixedUpdate () {
-		//Debug.Log (GetComponent<Rigidbody>().velocity);
-		brakePercent += (cpBrake.hamster != null && Input.GetKey (KeyCode.S)) ? 0.1f : -0.1f;
-		brakePercent = Mathf.Clamp (brakePercent, 0f, 1f);
-		gasPercent += (cpGas.hamster != null && (Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.S))) ? 0.1f : -0.1f;
-		gasPercent -= brakePercent; //Allows brakes to override gas, otherwise car would continue forwards if brake is held after and while gas is held.
-		gasPercent = Mathf.Clamp (gasPercent, 0f, 1f);
 
-        float motor = maxMotorTorque * (rev? -gasPercent : gasPercent); //Seperate gas pedal
-		float brake = maxBrakeTorque * brakePercent; //Seperate brake pedal
-		//Debug.Log (cpSteering.hamster);
-		float steering = maxSteeringTorque * (cpSteering.hamster != null ? Input.GetAxis ("Horizontal") : 0);
-		//Debug.Log (steering);
+        float motor = maxMotorTorque * Input.GetAxis("Vertical");
+        float steering = maxSteeringTorque * Input.GetAxis("Horizontal");
+
 		foreach (AxleInfo axleInfo in axleInfos) {
 			if (axleInfo.steering) {
 				axleInfo.leftWheel.steerAngle = steering;
@@ -60,10 +48,16 @@ public class CarController : MonoBehaviour {
 			}
 
 			if (axleInfo.motor) {
-				axleInfo.leftWheel.motorTorque = motor;
-				axleInfo.rightWheel.motorTorque = motor;
-				axleInfo.leftWheel.brakeTorque = brake;
-				axleInfo.rightWheel.brakeTorque = brake;
+                if (Input.GetAxis("Vertical") != 0)
+                {
+                    axleInfo.leftWheel.motorTorque = motor;
+                    axleInfo.rightWheel.motorTorque = motor;
+                }
+                else
+                {
+                    axleInfo.leftWheel.brakeTorque = motor;
+                    axleInfo.rightWheel.brakeTorque = motor;
+                }
 			}
 			Car_Running = GetComponent<AudioSource> ();
 			Car_Running.Play (0);
