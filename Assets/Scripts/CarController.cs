@@ -8,6 +8,7 @@ public class AxleInfo {
 	public WheelCollider rightWheel;
 	public bool motor;
 	public bool steering;
+
 }
 
 public class CarController : MonoBehaviour {
@@ -15,6 +16,7 @@ public class CarController : MonoBehaviour {
 	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent, accelPercent, decelPercent;
 	public ControlPoint cpSteering, cpBrake, cpGas, cpReverse;
 	public bool rev;
+	AudioSource Car_Running;
 
 	public void ApplyLocalPositionToVisuals (WheelCollider collider) {
 		if (collider.transform.childCount == 0)
@@ -63,7 +65,20 @@ public class CarController : MonoBehaviour {
 				axleInfo.leftWheel.brakeTorque = brake;
 				axleInfo.rightWheel.brakeTorque = brake;
 			}
-
+			Car_Running = GetComponent<AudioSource> ();
+			Car_Running.Play (0);
+			if(gasPercent > 0){
+				if (Car_Running == false) {
+				
+				}
+				else
+				{
+					Car_Running.UnPause();
+				}
+			}
+			else if(gasPercent == 0){
+				Car_Running.Pause ();
+			}
 			ApplyLocalPositionToVisuals (axleInfo.leftWheel);
 			ApplyLocalPositionToVisuals (axleInfo.rightWheel);
 		}
