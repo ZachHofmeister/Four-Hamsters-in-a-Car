@@ -130,6 +130,8 @@ public class CopCarAI : MonoBehaviour {
         Vector3 position;
         Quaternion rotation;
         collider.GetWorldPose(out position, out rotation);
+        collider.transform.position = position;
+        collider.transform.rotation = rotation;
     }
 
     private int ManhattanDistance(Road start, Road end)

@@ -14,11 +14,17 @@ public class AxleInfo {
 public class CarController : MonoBehaviour {
 	public List<AxleInfo> axleInfos;
 	public float maxMotorTorque, maxBrakeTorque, maxSteeringTorque, gasPercent, brakePercent, accelPercent, decelPercent;
-	public ControlPoint cpSteering, cpBrake, cpGas, cpReverse;
-	public bool rev;
 	AudioSource Car_Running;
 
-	public void ApplyLocalPositionToVisuals (WheelCollider collider) {
+    private Rigidbody body;
+
+    private void Start()
+    {
+        body = GetComponent<Rigidbody>();
+        body.centerOfMass = new Vector3(0f, -0.9f, 0f);
+    }
+
+    public void ApplyLocalPositionToVisuals (WheelCollider collider) {
 		if (collider.transform.childCount == 0)
 			return;
 
@@ -26,10 +32,9 @@ public class CarController : MonoBehaviour {
 
 		Vector3 position;
 		Quaternion rotation;
-		collider.GetWorldPose (out position, out rotation);
+        collider.GetWorldPose(out position, out rotation);
 
-		visualWheel.transform.position = position;
-		visualWheel.transform.rotation = rotation;
+        collider.transform.rotation = rotation;
 	}
 
 	public void FixedUpdate () {

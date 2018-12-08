@@ -1,9 +1,56 @@
 fileFormatVersion: 2
-guid: 42d309ce65e18644fbab3bfde61f38c5
+guid: 4fd9bee31978ef04e8adbaff7b2fd6f7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    2186277476908879412: ImportLogs
+    100000: //RootNode
+    100002: detail_spoilerSmall_46
+    100004: hood_sport_0
+    100006: trunk_default_40
+    100008: wheel_future_50
+    100010: wheel_future_51
+    100012: wheel_future_52
+    100014: wheel_future_53
+    100016: windshield_jeep_3
+    400000: //RootNode
+    400002: detail_spoilerSmall_46
+    400004: hood_sport_0
+    400006: trunk_default_40
+    400008: wheel_future_50
+    400010: wheel_future_51
+    400012: wheel_future_52
+    400014: wheel_future_53
+    400016: windshield_jeep_3
+    2100000: blueSteel
+    2100002: _defaultMat
+    2100004: light
+    2100006: orangeSteel
+    2100008: glass
+    2100010: tire
+    2300000: detail_spoilerSmall_46
+    2300002: hood_sport_0
+    2300004: trunk_default_40
+    2300006: wheel_future_50
+    2300008: wheel_future_51
+    2300010: wheel_future_52
+    2300012: wheel_future_53
+    2300014: windshield_jeep_3
+    3300000: detail_spoilerSmall_46
+    3300002: hood_sport_0
+    3300004: trunk_default_40
+    3300006: wheel_future_50
+    3300008: wheel_future_51
+    3300010: wheel_future_52
+    3300012: wheel_future_53
+    3300014: windshield_jeep_3
+    4300000: detail_spoilerSmall_46
+    4300002: hood_sport_0
+    4300004: trunk_default_40
+    4300006: wheel_future_50
+    4300008: wheel_future_51
+    4300010: wheel_future_52
+    4300012: wheel_future_53
+    4300014: windshield_jeep_3
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -81,7 +128,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
