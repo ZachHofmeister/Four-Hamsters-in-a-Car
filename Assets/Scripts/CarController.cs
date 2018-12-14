@@ -21,19 +21,16 @@ public class CarController : MonoBehaviour {
     private void Start()
     {
         body = GetComponent<Rigidbody>();
-        body.centerOfMass = new Vector3(0f, -0.9f, 0f);
+        body.centerOfMass = Vector3.down;
     }
 
     public void ApplyLocalPositionToVisuals (WheelCollider collider) {
 		if (collider.transform.childCount == 0)
 			return;
 
-		Transform visualWheel = collider.transform.GetChild (0);
-
 		Vector3 position;
 		Quaternion rotation;
         collider.GetWorldPose(out position, out rotation);
-
         collider.transform.rotation = rotation;
 	}
 
@@ -53,9 +50,15 @@ public class CarController : MonoBehaviour {
                 {
                     axleInfo.leftWheel.motorTorque = motor;
                     axleInfo.rightWheel.motorTorque = motor;
+
+                    axleInfo.leftWheel.brakeTorque = 0f;
+                    axleInfo.rightWheel.brakeTorque = 0f;
                 }
                 else
                 {
+                    axleInfo.leftWheel.motorTorque = 0f;
+                    axleInfo.rightWheel.motorTorque = 0f;
+
                     axleInfo.leftWheel.brakeTorque = motor;
                     axleInfo.rightWheel.brakeTorque = motor;
                 }

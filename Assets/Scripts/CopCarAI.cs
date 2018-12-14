@@ -16,11 +16,11 @@ public class Road
 
     [SerializeField]
     private string _name;
-    
+
 
     [SerializeField]
     private int _gCost, _hCost, _fCost;
-    
+
     public Road(Transform transform)
     {
         this._transform = transform;
@@ -46,14 +46,6 @@ public class Road
     {
         get { return _transform; }
         set { _transform = value; }
-    }
-
-    public bool drivable
-    {
-        get
-        {
-            return !Physics.CheckSphere(origin, 10f, 1 << LayerMask.NameToLayer("NPC Car"));
-        }
     }
 
     public Vector3 origin
@@ -101,10 +93,14 @@ public class CopCarAI : MonoBehaviour {
     private float currentSpeed;
 
     private List<Road> roads;
+    private Road currentRoad, nextRoad;
+    private float angleToNextRoad;
 
     private CarController player;
+    private Road playerRoad;
 
     private List<Road> currentPath;
+    private int currentDirection = 1;
 
     // Use this for initialization
     void Start() {
@@ -112,9 +108,7 @@ public class CopCarAI : MonoBehaviour {
 
         roads = new List<Road>();
         foreach (Transform road in GameObject.Find("Roads").transform)
-        {
             roads.Add(new Road(road.transform));
-        }
 
         player = FindObjectOfType<CarController>();
         currentPath = new List<Road>();
@@ -231,7 +225,7 @@ public class CopCarAI : MonoBehaviour {
 
             foreach (Road neighbor in GetNearByRoads(current))
             {
-                if (!neighbor.drivable || closed.Contains(neighbor))
+                if (closed.Contains(neighbor))
                     continue;
 
                 int possibleGCost = current.gCost + ManhattanDistance(neighbor, current);
@@ -315,25 +309,47 @@ public class CopCarAI : MonoBehaviour {
     // Update is called once per frame
     private void Update()
     {
-        Road currentRoad = FindRoadWith(transform);
-        Road playerRoad = FindRoadWith(player.transform);
+        currentRoad = FindRoadWith(transform);
+        playerRoad = FindRoadWith(player.transform);
         
         FindPathBetween(currentRoad, playerRoad);
         ShowPath();
+
+        if (currentDirection == -1)
+        {
+            if (RoundAngle(transform.eulerAngles.y) % 90 == 0)
+            {
+                currentDirection = 1;
+            }
+        }
     }
 
     void FixedUpdate () {
         
         currentSpeed = body.velocity.magnitude * 2.237f;
-        wheelFL.motorTorque = currentSpeed < maxSpeed ? maxMotorTorque : 0f;
-        wheelFR.motorTorque = currentSpeed < maxSpeed ? maxMotorTorque : 0f;
+        wheelFL.motorTorque = currentSpeed < maxSpeed ? currentDirection * maxMotorTorque : 0f;
+        wheelFR.motorTorque = currentSpeed < maxSpeed ? currentDirection * maxMotorTorque : 0f;
         
         if (currentPath.Count > 0)
         {
-            Road nextRoad = currentPath[0];
-            Vector3 nextVector = transform.InverseTransformPoint(nextRoad.origin);
-            float nextSteer = (nextVector.x / nextVector.magnitude) * maxSteerAngle;
-            TurnWheels(nextSteer);
+            nextRoad = currentPath[0];
+            angleToNextRoad = RoundAngle(Vector3.SignedAngle(transform.forward, nextRoad.origin - currentRoad.origin, Vector3.up));
+            if (angleToNextRoad < 180 - maxSteerAngle)
+            {
+                Vector3 nextVector = transform.InverseTransformPoint(nextRoad.origin);
+                float nextSteer = (nextVector.x / nextVector.magnitude) * maxSteerAngle;
+                TurnWheels(currentDirection * nextSteer);
+            }
+            else
+            {
+                TurnWheels(maxSteerAngle);
+            }
+        }
+        else if (currentRoad == playerRoad)
+        {
+            Vector3 relativeVectorToPlayer = transform.InverseTransformPoint(player.transform.position);
+            float steerToPlayer = (relativeVectorToPlayer.x / relativeVectorToPlayer.magnitude) * maxSteerAngle;
+            TurnWheels(currentDirection * steerToPlayer);
         }
         
 
@@ -341,5 +357,13 @@ public class CopCarAI : MonoBehaviour {
         ApplyLocalPositionToVisuals(wheelFR, Vector3.forward * 0.5f);
         ApplyLocalPositionToVisuals(wheelBL, Vector3.forward * -0.5f);
         ApplyLocalPositionToVisuals(wheelBR, Vector3.forward * 0.5f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (LayerMask.LayerToName(other.gameObject.layer) != "Car")
+        {
+            currentDirection *= -1;
+        }
     }
 }

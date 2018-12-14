@@ -5,9 +5,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public bool canLookAround = false;
-
     public float turnSpeed = 4.0f;
-    public Transform target;
+    private Transform target;
+
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {

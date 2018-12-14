@@ -42,7 +42,7 @@ public class HamsterStats : MonoBehaviour
 		resourceDecrease += 0.05;
 		if (currentThirst <= 0 || currentHunger <= 0) //Loads death scene upon losing hunger/thirst // Could be changed later
 		{
-			SceneManager.LoadScene("Death Screen");
+			//SceneManager.LoadScene("Death Screen");
 		}
 	}
 

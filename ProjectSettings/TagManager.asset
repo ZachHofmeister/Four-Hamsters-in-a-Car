@@ -9,6 +9,9 @@ TagManager:
   - WaterSupply
   - FoodSupply
   - GasSupply
+  - Civilian Car
+  - Hamster Car
+  - Police Car
   layers:
   - Default
   - TransparentFX
